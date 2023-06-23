@@ -8,7 +8,13 @@
     <p class="my-4"><b>Customer:</b> {{$project->customer}}</p>
     @if ($project->type)
         <p class="my-4"><b>Type:</b> {{$project->type->name}}</p>
-    @endif    
+    @endif
+    
+    @if( $project->technologies )
+    	@foreach ( $project->technologies as $elem )
+    		<div> <b>Technology:</b> {{ $elem->name }} </div>
+    	@endforeach
+    @endif
 </div>
 
 @endsection

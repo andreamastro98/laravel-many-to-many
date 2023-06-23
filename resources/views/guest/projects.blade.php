@@ -14,7 +14,7 @@
                     <div class="card overflow-hidden shadow rounded-4 border-0 mb-5">
                         <div class="card-body p-0">
                             <div class="d-flex align-items-center">
-                                <div class="p-5">
+                                <div class="p-5 desc">
                                     <h2 class="fw-bolder">{{$elem->title}}</h2>
                                     @if ($elem->type)
                                         <h6 class="fw-bolder">{{$elem->type->name}}</h6>
@@ -24,7 +24,7 @@
                                         <a class="btn btn-primary" href="{{ route('show', $elem->id )}}">Show</a>
                                     </div>
                                 </div>
-                                <img class="img-fluid" src="{{ asset('/storage/' . $elem->cover_image)}}" alt="..." style="width: 100%"/>
+                                <img class="img-fluid" src="{{ asset('/storage/' . $elem->cover_image)}}" alt="..."/>
                             </div>
                         </div>
                         

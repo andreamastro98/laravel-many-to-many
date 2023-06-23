@@ -14,10 +14,12 @@
                                 <div class="card overflow-hidden shadow rounded-4 border-0 mb-5">
                                     <div class="card-body p-0">
                                         <div class="d-flex align-items-center">
-                                            <div class="p-5">
+                                            <div class="p-5 desc">
                                                 
                                                 <h2 class="fw-bolder">{{$elem->title}}</h2>
-                                                <h6 class="fw-bolder">{{$elem->type->name}}</h6>
+                                                @if ($elem->type)
+                                                    <p class="my-4"><b>Type:</b> {{$elem->type->name}}</p>
+                                                @endif
                                                 <p>{{$elem->description}}</p>
 
                                                 <div class="mb-1"> 
