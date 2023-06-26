@@ -29,7 +29,8 @@ class UpdatePostRequest extends FormRequest
             'customer' => ['nullable'],
             'slug' => ['nullable'],
             'description' => ['nullable'],
-            'cover_slug' => ['nullable']
+            'cover_slug' => ['nullable'],
+            'technologies' => ['exists:technologies,id']
         ];
     }
 }

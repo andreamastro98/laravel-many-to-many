@@ -40,7 +40,7 @@
 
                                 {{-- select --}}
                                 <label for="projectType" class="form-label">Project Type</label>
-                                <select class="form-select @error('type_id') is-invalid @enderror"" aria-label="Default select example" name="type_id">
+                                <select class="form-select @error('type_id') is-invalid @enderror" aria-label="Default select example" name="type_id">
 
                                     <option value="">-- Scegli una categoria --</option>
 
@@ -51,6 +51,24 @@
                                         <div class="alert alert-danger">{{ $message }}</div>
                                     @enderror                                    
                                 </select>
+
+                                {{-- checkbox per le tecnologies --}}
+
+                                <label for="projectTechnology" class="form-label my-3">Project Technology</label>
+
+                                @foreach ($technologies as $elem)
+                                    <div class="form-check">
+                                    <input class="form-check-input" 
+                                        type="checkbox" 
+                                        value="{{ $elem->id }}"
+                                        name="technologies[]" 
+                                        id="project-checkbox-{{ $elem->id }}">
+                                    <label class="form-check-label" for="project-checkbox-{{ $elem->id }}">
+                                        {{ $elem->name }}
+                                    </label>
+                                </div>
+                                @endforeach
+                                
 
                                  <button type="submit" class="btn btn-primary mt-5">Create Project</button>
 

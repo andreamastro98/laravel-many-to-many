@@ -7,6 +7,7 @@ use App\Models\Admin\Project;
 use Illuminate\Http\Request;
 use App\Http\Requests\CreatePostRequest;
 use App\Http\Requests\UpdatePostRequest;
+use App\Models\Admin\Technology;
 use App\Models\Admin\Type;
 use Illuminate\Support\Facades\Storage;
 
@@ -33,7 +34,9 @@ class ProjectController extends Controller
     {
         $types = Type::all();
 
-        return view('projects.create', compact('types'));
+        $technologies = Technology::all();
+
+        return view('projects.create', compact('types', 'technologies'));
     }
 
     /**
@@ -72,6 +75,10 @@ class ProjectController extends Controller
         $newProject->fill($form_data);
         $newProject->save();
 
+        if ($request->has('technologies')) {
+            $newProject->technologies()->attach($request->technologies);
+        }
+
         return redirect()->route('admin.project.index');
     }
 
@@ -96,7 +103,9 @@ class ProjectController extends Controller
     {
         $types = Type::all();
 
-        return view('projects.edit', compact('project', 'types'));
+        $technologies = Technology::all();
+
+        return view('projects.edit', compact('project', 'types', 'technologies'));
     }
 
     /**
@@ -137,6 +146,10 @@ class ProjectController extends Controller
 
         $project->update($form_data);
 
+        if ($request->has('technologies')) {
+            $project->technologies()->sync($request->technologies);
+        }
+
         return redirect()->route('admin.project.index');
     }
 
@@ -148,6 +161,8 @@ class ProjectController extends Controller
      */
     public function destroy(Project $project)
     {
+
+        $project->technologies()->sync([]);
 
         if ($project->cover_image) {
             Storage::delete($project->cover_image);

@@ -54,6 +54,41 @@
                                     @enderror                                    
                                 </select>
 
+                                {{-- checkbox --}}
+
+                                <label for="projectTechnology" class="form-label my-3">Project Technology</label>
+
+                                @foreach ($technologies as $elem)
+                                    <div class="form-check">
+
+                                        @if ($errors->any())
+
+                                            <input class="form-check-input" 
+                                                type="checkbox" 
+                                                value="{{ $elem->id }}"
+                                                name="technologies[]" 
+                                                id="project-checkbox-{{ $elem->id }}"
+                                                {{ in_array( $elem->id, old( 'technologies', [] ) ) ? 'checked' : '' }}>
+                                            
+                                        @else
+                                            
+                                            <input class="form-check-input" 
+                                                type="checkbox" 
+                                                value="{{ $elem->id }}"
+                                                name="technologies[]" 
+                                                id="project-checkbox-{{ $elem->id }}"
+                                                {{ ($project->technologies->contains($elem) ) ? 'checked' : ''}}>
+
+                                       
+                                        @endif
+
+                                    
+                                    <label class="form-check-label" for="project-checkbox-{{ $elem->id }}">
+                                        {{ $elem->name }}
+                                    </label>
+                                </div>
+                                @endforeach
+
                                  <button type="submit" class="btn btn-primary mt-5">Update Project</button>
 
                             </form>                         

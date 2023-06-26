@@ -30,7 +30,8 @@ class CreatePostRequest extends FormRequest
             'slug' => ['nullable'],
             'description' => ['nullable'],
             'cover_slug' => ['nullable'],
-            'type_id' => ['nullable','exists:types,id']
+            'type_id' => ['nullable','exists:types,id'],
+            'technologies' => ['exists:technologies,id']
         ];
     }
 }
