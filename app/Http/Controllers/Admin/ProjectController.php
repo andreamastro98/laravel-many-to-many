@@ -75,9 +75,14 @@ class ProjectController extends Controller
         $newProject->fill($form_data);
         $newProject->save();
 
+        //oppure questa sintassi
+        //$newProject = Project::create($form_data);
+
         if ($request->has('technologies')) {
             $newProject->technologies()->attach($request->technologies);
         }
+
+        toastr()->success('Hai creato un nuovo progetto!', 'Congrats');
 
         return redirect()->route('admin.project.index');
     }
@@ -146,9 +151,11 @@ class ProjectController extends Controller
 
         $project->update($form_data);
 
-        if ($request->has('technologies')) {
-            $project->technologies()->sync($request->technologies);
-        }
+        //pusho le tecnologie nella tabella pivot
+        $project->technologies()->sync($request->technologies);
+
+        toastr()->success('Hai modificato il progetto selezionato!', 'Congrats');
+
 
         return redirect()->route('admin.project.index');
     }
@@ -169,6 +176,8 @@ class ProjectController extends Controller
         }   
         
         $project->delete();
+
+        toastr()->success('Hai cancellato il progetto selezionato!', 'Congrats');
 
         return redirect()->route('admin.project.index');
     }
